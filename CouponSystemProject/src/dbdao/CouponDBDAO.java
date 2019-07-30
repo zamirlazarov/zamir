@@ -41,14 +41,15 @@ public class CouponDBDAO implements CouponDAO {
 			String sql = "INSERT INTO Coupon (Title, startdate, endDate, Amount, Type, Message, price, image) values (?,?,?,?,?,?,?,?)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, coupon.getTitle());
-			pstmt.setDate(2, (Date) coupon.getStartDate());
-			pstmt.setDate(3, (Date) coupon.getEndDate());
+			pstmt.setDate(2, coupon.getStartDate());
+			pstmt.setDate(3, coupon.getEndDate());
 			pstmt.setInt(4, coupon.getAmount());
-			pstmt.setString(5, coupon.getType().name());
+			pstmt.setString(5, coupon.getType().toString());
 			pstmt.setString(6, coupon.getMessage());
 			pstmt.setDouble(7, coupon.getPrice());
 			pstmt.setString(8, coupon.getImage());
 			pstmt.executeUpdate();
+			
 			if (resultSet.next()) {
 				id = resultSet.getLong(1);
 			}
@@ -98,7 +99,7 @@ public class CouponDBDAO implements CouponDAO {
 	}
 
 	@Override
-	public void updateCoupon(Coupon coupon,long id) throws Exception {
+	public void updateCoupon(Coupon coupon, long id) throws Exception {
 		Connection con = null;
 		try {
 			try {
@@ -107,11 +108,10 @@ public class CouponDBDAO implements CouponDAO {
 			} catch (Exception e) {
 				throw new Exception("Error connection");
 			}
-		String sql = "UPDATE Coupon SET Title=?, startdate=?, endDate=?, Amount=?, Type=?, Message=?, price=?, image=? WHERE id=?";
-		
+			String sql = "UPDATE Coupon SET Title=?, startdate=?, endDate=?, Amount=?, Type=?, Message=?, price=?, image=? WHERE id=?";
+
 			PreparedStatement pstmt = con.prepareStatement(sql);
 
-			
 			pstmt.setDate(1, (Date) coupon.getEndDate());
 			pstmt.setDouble(2, coupon.getPrice());
 			pstmt.setLong(3, id);
@@ -131,9 +131,10 @@ public class CouponDBDAO implements CouponDAO {
 			if (connectionPool != null) {
 				connectionPool.returnConnection(con);
 				connectionPool = null;
+			}
 		}
 	}
-	}
+
 	@Override
 	public Coupon getCoupon(long id) throws Exception {
 		Connection con = null;
@@ -150,60 +151,60 @@ public class CouponDBDAO implements CouponDAO {
 			String sql = "SELECT * from Coupon where id=" + id;
 			PreparedStatement pstmt = con.prepareStatement(sql);
 //*/
-			resultSet  = pstmt.executeQuery();
+			resultSet = pstmt.executeQuery();
 			if (resultSet.next()) {
 				do {
-			coupon.setCouponId(resultSet.getLong(1));
-			coupon.setTitle(resultSet.getString(2));
-			coupon.setStartDate(resultSet.getDate(3));
-			coupon.setEndDate(resultSet.getDate(4));
-			coupon.setAmount(resultSet.getInt(5));
-			String type = resultSet.getString(6);
-			switch (type) {
-			case "FOOD":
-				coupon.setType(CouponType.Food);
-				break;
-			case "RESTURANT":
-				coupon.setType(CouponType.Resturant);
-				break;
-			case "ELECTRICITY":
-				coupon.setType(CouponType.Electricity);
-				break;
-			case "HEALTH":
-				coupon.setType(CouponType.Health);
-				break;
-			case "SPORTS":
-				coupon.setType(CouponType.Sports);
-				break;
-			case "CAMPING":
-				coupon.setType(CouponType.Camping);
-				break;
-			case "TRAVELLING":
-				coupon.setType(CouponType.Travelling);
-				break;
-			}
-			
-			coupon.setMessage(resultSet.getString(7));
-			coupon.setPrice(resultSet.getDouble(8));
-			coupon.setImage(resultSet.getString(9));
-			
+					coupon.setCouponId(resultSet.getLong(1));
+					coupon.setTitle(resultSet.getString(2));
+					coupon.setStartDate(resultSet.getDate(3));
+					coupon.setEndDate(resultSet.getDate(4));
+					coupon.setAmount(resultSet.getInt(5));
+					String type = resultSet.getString(6);
+					switch (type) {
+					case "FOOD":
+						coupon.setType(CouponType.Food);
+						break;
+					case "RESTURANT":
+						coupon.setType(CouponType.Resturant);
+						break;
+					case "ELECTRICITY":
+						coupon.setType(CouponType.Electricity);
+						break;
+					case "HEALTH":
+						coupon.setType(CouponType.Health);
+						break;
+					case "SPORTS":
+						coupon.setType(CouponType.Sports);
+						break;
+					case "CAMPING":
+						coupon.setType(CouponType.Camping);
+						break;
+					case "TRAVELLING":
+						coupon.setType(CouponType.Travelling);
+						break;
+					}
+
+					coupon.setMessage(resultSet.getString(7));
+					coupon.setPrice(resultSet.getDouble(8));
+					coupon.setImage(resultSet.getString(9));
+
 				} while (resultSet.next());
 			} else {
 				throw new Exception("Cannot get this coupon");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		
-	} finally {
-		if (connectionPool != null) {
-			connectionPool.returnConnection(con);
-			connectionPool = null;
-			if (resultSet != null) {
-				resultSet.close();
+
+		} finally {
+			if (connectionPool != null) {
+				connectionPool.returnConnection(con);
+				connectionPool = null;
+				if (resultSet != null) {
+					resultSet.close();
+				}
+
 			}
-		
 		}
-	}
 		return coupon;
 
 	}
@@ -222,93 +223,91 @@ public class CouponDBDAO implements CouponDAO {
 			} catch (Exception e) {
 				throw new Exception("Error connection");
 			}
-		String sql = "SELECT * FROM coupon";
-		PreparedStatement pstmt = con.prepareStatement(sql);
+			String sql = "SELECT * FROM coupon";
+			PreparedStatement pstmt = con.prepareStatement(sql);
 
-		resultSet  = pstmt.executeQuery();
-		if (resultSet.next()) {
-			do {
-				//Coupon tmp = new Coupon();
-				long id = resultSet.getLong(1);
-				
-				String Title = resultSet.getString(2);
-				
-				Date startdate = resultSet.getDate(3);
-				
-				Date endDate = resultSet.getDate(4);
-				
-				Integer Amount = resultSet.getInt(5);
-				
-				String type = resultSet.getString(6);
+			resultSet = pstmt.executeQuery();
+			if (resultSet.next()) {
+				do {
+					// Coupon tmp = new Coupon();
+					long id = resultSet.getLong(1);
 
-				CouponType couponType = null;
-				switch (type) {
-				case "FOOD":
-					couponType = CouponType.Food;
-					// tmp.setType(CouponType.Food);
-					break;
-				case "RESTURANT":
-					couponType = CouponType.Resturant;
+					String Title = resultSet.getString(2);
 
-					// tmp.setType(CouponType.Resturant);
-					break;
-				case "ELECTRICITY":
-					couponType = CouponType.Electricity;
+					Date startdate = resultSet.getDate(3);
 
-					// tmp.setType(CouponType.Electricity);
-					break;
-				case "HEALTH":
-					couponType = CouponType.Health;
+					Date endDate = resultSet.getDate(4);
 
-					// tmp.setType(CouponType.Health);
-					break;
-				case "SPORTS":
-					couponType = CouponType.Sports;
+					Integer Amount = resultSet.getInt(5);
 
-					// tmp.setType(CouponType.Sports);
-					break;
-				case "CAMPING":
-					couponType = CouponType.Camping;
+					String type = resultSet.getString(6);
 
-					// tmp.setType(CouponType.Camping);
-					break;
-				case "TRAVELLING":
-					couponType = CouponType.Travelling;
+					CouponType couponType = null;
+					switch (type) {
+					case "FOOD":
+						couponType = CouponType.Food;
+						// tmp.setType(CouponType.Food);
+						break;
+					case "RESTURANT":
+						couponType = CouponType.Resturant;
 
-					// tmp.setType(CouponType.Travelling);
-					break;
+						// tmp.setType(CouponType.Resturant);
+						break;
+					case "ELECTRICITY":
+						couponType = CouponType.Electricity;
 
+						// tmp.setType(CouponType.Electricity);
+						break;
+					case "HEALTH":
+						couponType = CouponType.Health;
+
+						// tmp.setType(CouponType.Health);
+						break;
+					case "SPORTS":
+						couponType = CouponType.Sports;
+
+						// tmp.setType(CouponType.Sports);
+						break;
+					case "CAMPING":
+						couponType = CouponType.Camping;
+
+						// tmp.setType(CouponType.Camping);
+						break;
+					case "TRAVELLING":
+						couponType = CouponType.Travelling;
+
+						// tmp.setType(CouponType.Travelling);
+						break;
+
+					}
+					{
+						String Massage = resultSet.getString(7);
+
+						double Price = resultSet.getDouble(8);
+						String Image = resultSet.getString(9);
+
+						coupon = new Coupon(id, Title, startdate, endDate, Amount, couponType, Massage, Price, Image);
+						list.put(id, coupon);
+					}
+
+				} while (resultSet.next());
+			} else {
+				throw new Exception("Cannot get all coupons");
+			}
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
+			e.printStackTrace();
+
+		} finally {
+			if (connectionPool != null) {
+				connectionPool.returnConnection(con);
+				connectionPool = null;
+				if (resultSet != null) {
+					resultSet.close();
 				}
-				{
-					String Massage = resultSet.getString(7);
 
-					double Price = resultSet.getDouble(8);
-					String Image = resultSet.getString(9);
+			}
 
-					coupon = new Coupon(id, Title, startdate, endDate, Amount, couponType, Massage, Price, Image);
-					list.put(id, coupon);
-				}
-			
-
-		} while (resultSet.next());
-		} else {
-			throw new Exception("Cannot get all coupons");
-		}
-	} catch (Exception e) {
-		System.err.println(e.getMessage());
-		e.printStackTrace();
-	
-} finally {
-	if (connectionPool != null) {
-		connectionPool.returnConnection(con);
-		connectionPool = null;
-		if (resultSet != null) {
-			resultSet.close();
-		}
-	
-	}
-
-	
 		}
 		return list;
 	}
@@ -324,50 +323,49 @@ public class CouponDBDAO implements CouponDAO {
 			} catch (Exception e) {
 				throw new Exception("Error connection");
 			}
-		String sql = "Select * from coupon where coupontype= ? ";
-		PreparedStatement pStatement = con.prepareStatement(sql);
-		
-		pStatement.setString(1, couponType.name());
-		resultSet = pStatement.executeQuery();
-		if (resultSet.next()) {
-			do {
-				String type = resultSet.getString("coupontype");
-				long id = resultSet.getLong("id");
-				Date startDate = resultSet.getDate("startDate");
-				Date endDate = resultSet.getDate("endDate");
-				String title = resultSet.getString("title");
-				int amount = resultSet.getInt("amount");
-				Double price = resultSet.getDouble("prica");
-				String image = resultSet.getString("image");
-				String massage = resultSet.getString("massage");
-				System.out.println(String.format(
-						"id=%d , title=%s start date=%tD end date=%tD amount=%d type=%s message=%s price=%.2f image=%s",
-						id, title, startDate, endDate, amount, type, massage, price, image));
+			String sql = "Select * from coupon where coupontype= ? ";
+			PreparedStatement pStatement = con.prepareStatement(sql);
 
-				
-			} while (resultSet.next());
-		} else {
-			throw new Exception("there is a problem with this coupon type");
+			pStatement.setString(1, couponType.name());
+			resultSet = pStatement.executeQuery();
+			if (resultSet.next()) {
+				do {
+					String type = resultSet.getString("coupontype");
+					long id = resultSet.getLong("id");
+					Date startDate = resultSet.getDate("startDate");
+					Date endDate = resultSet.getDate("endDate");
+					String title = resultSet.getString("title");
+					int amount = resultSet.getInt("amount");
+					Double price = resultSet.getDouble("prica");
+					String image = resultSet.getString("image");
+					String massage = resultSet.getString("massage");
+					System.out.println(String.format(
+							"id=%d , title=%s start date=%tD end date=%tD amount=%d type=%s message=%s price=%.2f image=%s",
+							id, title, startDate, endDate, amount, type, massage, price, image));
+
+				} while (resultSet.next());
+			} else {
+				throw new Exception("there is a problem with this coupon type");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		} finally {
+			if (connectionPool != null) {
+				connectionPool.returnConnection(con);
+				connectionPool = null;
+				if (resultSet != null) {
+					resultSet.close();
+				}
+			}
+
 		}
-	} catch (Exception e) {
-		e.printStackTrace();
-	
-} finally {
-	if (connectionPool != null) {
-		connectionPool.returnConnection(con);
-		connectionPool = null;
-		if (resultSet != null) {
-			resultSet.close();
-		}
-		}
-	
-}
 	}
-	
+
 	@Override
 	public boolean updateCouponAmount(int amount, long id) throws Exception {
 		Connection con = null;
-		boolean flag=false;
+		boolean flag = false;
 		try {
 
 			try {
@@ -376,31 +374,27 @@ public class CouponDBDAO implements CouponDAO {
 				throw new Exception("error connection");
 			}
 			String sql = " UPDATE Coupon SET amount=amount-? where id=? and amount >0";
-					
 
 			PreparedStatement preparedStatement = con.prepareStatement(sql);
 			preparedStatement.setInt(1, amount);
 			preparedStatement.setLong(2, id);
 			int count = preparedStatement.executeUpdate();
 			if (count > 0) {
-				flag=true;
+				flag = true;
 			} else {
 				throw new Exception("illegal purchase");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-		
+
 			if (connectionPool != null) {
 				connectionPool.returnConnection(con);
 				connectionPool = null;
 			}
 		}
-	
+
 		return flag;
 	}
 
 }
-	
-
-
