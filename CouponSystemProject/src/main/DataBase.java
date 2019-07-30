@@ -53,7 +53,7 @@ public class DataBase {
 				throw new Exception("Error connection");
 			}
 
-			String sql = "create table Coupon (id integer not null primary key auto_increment, title text not null, startdate text not null, enddate text not null, amount integer not null ,type text not null, message text not null, price double not null, image text not null)";
+			String sql = "create table Coupon (id integer not null primary key auto_increment, Title text not null, startdate text not null, endDate text not null, Amount integer not null ,Type text not null, Message text not null, price double not null, image text not null)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.executeUpdate(sql);
 			System.out.println("coupon:" + sql);

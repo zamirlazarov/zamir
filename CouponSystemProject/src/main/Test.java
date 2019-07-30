@@ -27,9 +27,9 @@ public class Test {
 		// DataBase.CreateAllTabales();
         //DataBase.DropAllTables();
 
-		Test1.Admin();
+		//Test1.Admin();
 		
-		// Test1.Company();
+		 Test1.Company();
 		 
 		// Test1.Customer();
 	}

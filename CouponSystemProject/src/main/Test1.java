@@ -18,16 +18,16 @@ public class Test1 {
 	//	adminFacade.insertCompany("Teva", "1234", "teva@gmail.com");
 //		System.out.println(2);
 	//	adminFacade.insertCompany("TikunOlam", "1597", "TikunOlam@gmail.com");
-//		adminFacade.insertCompany(125,"Amdocs", "2345", "Amdocs@gmail.com");
-//		adminFacade.insertCompany(126,"BBB", "4567", "BBB@gmail.com");
+//		adminFacade.insertCompany("Amdocs", "2345", "Amdocs@gmail.com");
+//		adminFacade.insertCompany("BBB", "4567", "BBB@gmail.com");
 //		adminFacade.insertCompany(127,"MOses", "98874", "moses@gmail.com");
 //
 	//	adminFacade.insertCustomer("BobiBoten", "7456");
 	//	adminFacade.insertCustomer(" Zamir Lazarev", "3112");
-//		adminFacade.insertCustomer(3,"Cristiano Ronaldo", "0707");
-//		adminFacade.insertCustomer(4,"Shuki Potash", "4458");
-//		adminFacade.insertCustomer(5,"Eli Taviv", "1556");
-//		adminFacade.insertCustomer(6,"Israel Israeli", "4898");
+//		adminFacade.insertCustomer("Cristiano Ronaldo", "0707");
+//		adminFacade.insertCustomer("Shuki Potash", "4458");
+//		adminFacade.insertCustomer("Eli Taviv", "1556");
+//		adminFacade.insertCustomer("Israel Israeli", "4898");
 
 		// System.out.println("end");
 
