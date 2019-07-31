@@ -65,7 +65,7 @@ public class CompanyCouponsDBDAO implements CompanyCouponsDAO {
 				list.put(id, coupon);
 			} while (resultSet.next());
 		} else {
-			throw new Exception("Cannot get all companycoupons");
+			throw new Exception("Cannot get all Companycoupons");
 		}
 	} catch (Exception e) {
 		e.printStackTrace();

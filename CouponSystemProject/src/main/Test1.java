@@ -56,7 +56,7 @@ public class Test1 {
 		Date startDate = new Date(DateEvents.getDateFromToday(0));
 		Date endDate = new Date(DateEvents.getDateFromToday(1));
 
-		companyFacade.insertCoupon("humnburger22", startDate, endDate, 20, CouponType.Health, "Good Indica", 4555, "");
+		//companyFacade.insertCoupon("humnburger22", startDate, endDate, 20, CouponType.Health, "Good Indica", 4555, "");
 		//*companyFacade.insertCoupon("AK47", startDate, endDate, 20, CouponType.Health, "Good Indica", 4000, "");
 		// companyFacade.insertCoupon("Hamburger", startDate, endDate, 20,
 		// CouponType.Resturant, "200 Gram with bacon", 50,"");

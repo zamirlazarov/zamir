@@ -29,7 +29,7 @@ public class DataBase {
 			String sql = "create table Company (id integer not null primary key auto_increment, companyname text not null, password text not null, email text not null)";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.executeUpdate(sql);
-			System.out.println("company:" + sql);
+			System.out.println("Company:" + sql);
 
 		} catch (Exception e) {
 			e.printStackTrace();

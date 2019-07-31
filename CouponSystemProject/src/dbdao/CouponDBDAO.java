@@ -56,7 +56,7 @@ public class CouponDBDAO implements CouponDAO {
 			if (resultSet.next()) {
 				id = resultSet.getLong("id");
 			}
-			System.out.println("Coupon " + coupon.getTitle() + " was added succesfully");
+			System.out.println("Coupon " + coupon.getTitle() + " was added Succesfully");
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

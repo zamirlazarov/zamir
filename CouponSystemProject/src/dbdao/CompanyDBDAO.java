@@ -162,7 +162,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			
 		
 	} else {
-		throw new Exception("company not found");
+		throw new Exception("Company not found");
 	}
 } catch (Exception e) {
 	e.printStackTrace();
