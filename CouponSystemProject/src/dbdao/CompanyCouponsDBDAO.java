@@ -53,7 +53,7 @@ public class CompanyCouponsDBDAO implements CompanyCouponsDAO {
 			} catch (Exception e) {
 				throw new Exception("Error connection");
 			}
-		String sql = "SELECT * FROM Companycoupons where id=? ";
+		String sql = "SELECT * FROM Companycoupons where companyid=? ";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setLong(1, company.getId());
 		resultSet  = pstmt.executeQuery();

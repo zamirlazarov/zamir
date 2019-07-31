@@ -103,7 +103,8 @@ public class DataBase {
 				throw new Exception("Error connection");
 			}
 
-			String sql = "create table Customercoupons ( customerid integer not null, couponid integer not null, foreign key(customerid) references customer(id) on delete cascade, foreign key (couponid) references coupon (id) on delete cascade , primary key (customerid, couponid) );";
+			String sql = "create table Customercoupons ( customerid integer not null, couponid integer not null,"
+					+ "foreign key(customerid) references customer(id) on delete cascade, foreign key (couponid) references coupon (id) on delete cascade , primary key (customerid, couponid) );";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.executeUpdate(sql);
 			System.out.println("customercoupons:" + sql);
@@ -129,7 +130,7 @@ public class DataBase {
 			}
 
 			String sql = "create table Companycoupons (companyid integer not null, couponid integer not null,"
-					+ " foreign key (companyid) references customer (id) on delete cascade ,"
+					+ " foreign key (companyid) references company (id) on delete cascade ,"
 					+ " foreign key (couponid) references coupon (id) on delete cascade , primary key (companyid , couponid) )";
 			PreparedStatement pstmt = con.prepareStatement(sql);
 			pstmt.executeUpdate(sql);

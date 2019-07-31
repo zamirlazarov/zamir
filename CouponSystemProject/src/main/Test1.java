@@ -56,8 +56,8 @@ public class Test1 {
 		Date startDate = new Date(DateEvents.getDateFromToday(0));
 		Date endDate = new Date(DateEvents.getDateFromToday(1));
 
-		//companyFacade.insertCoupon("Inbar", startDate, endDate, 20, CouponType.Health, "Good Indica", 2500, "");
-		//companyFacade.insertCoupon("AK47", startDate, endDate, 20, CouponType.Health, "Good Indica", 4000, "");
+		companyFacade.insertCoupon("humnburger22", startDate, endDate, 20, CouponType.Health, "Good Indica", 4555, "");
+		//*companyFacade.insertCoupon("AK47", startDate, endDate, 20, CouponType.Health, "Good Indica", 4000, "");
 		// companyFacade.insertCoupon("Hamburger", startDate, endDate, 20,
 		// CouponType.Resturant, "200 Gram with bacon", 50,"");
 
@@ -65,7 +65,7 @@ public class Test1 {
 		 //companyFacade.deleteCoupon(2);
 		// companyFacade.getCouponsByPrice(4000);
 		// companyFacade.getCompany();
-		 companyFacade.updateCoupon(endDate, 3000, 6);
+		 //companyFacade.updateCoupon(endDate, 3000, 6);
 		// companyFacade.getCouponsByType(CouponType.Health);
 		// companyFacade.getCouponsByEndDate(28, 07, 2019);
 		couponSystem.getInstance().shutdown();
@@ -76,7 +76,7 @@ public class Test1 {
 		CouponSystem couponSystem = CouponSystem.getInstance();
 		CustomerFacade customerFacade = (CustomerFacade) couponSystem.login("Zamir Lazarev", "3112",
 				ClientType.customerfacade);
-		customerFacade.purchaseCouponById(1);
+		customerFacade.purchaseCouponById(2);
 //	     customerFacade.getPurchaseHistory();
 //	     customerFacade.getPurchaseHistoryByPrice(2500);
 //	     customerFacade.getPurchaseHistoryByType(CouponType.Health);

@@ -29,7 +29,6 @@ public class CouponDBDAO implements CouponDAO {
 	@Override
 	public long insertCoupon(Coupon coupon) throws Exception {
 		Connection con = null;
-		ResultSet resultSet = null;
 		long id = 0;
 		try {
 			try {
@@ -49,9 +48,13 @@ public class CouponDBDAO implements CouponDAO {
 			pstmt.setDouble(7, coupon.getPrice());
 			pstmt.setString(8, coupon.getImage());
 			pstmt.executeUpdate();
-			
+
+			String query = "SELECT * FROM coupon where title = ?";
+			 PreparedStatement pStatement = con.prepareStatement(query);
+			 pStatement.setString(1, coupon.getTitle());
+			 ResultSet resultSet = pStatement.executeQuery() ;
 			if (resultSet.next()) {
-				id = resultSet.getLong(1);
+				id = resultSet.getLong("id");
 			}
 			System.out.println("Coupon " + coupon.getTitle() + " was added succesfully");
 		} catch (Exception e) {
@@ -230,65 +233,66 @@ public class CouponDBDAO implements CouponDAO {
 			if (resultSet.next()) {
 				do {
 					// Coupon tmp = new Coupon();
-					long id = resultSet.getLong(1);
+					long id = resultSet.getLong("id");
 
-					String Title = resultSet.getString(2);
+					String Title = resultSet.getString("Title");
 
-					Date startdate = resultSet.getDate(3);
+					System.out.println(resultSet.getDate("startdate"));
+					Date startdate = resultSet.getDate("startdate");
 
-					Date endDate = resultSet.getDate(4);
+					Date endDate = resultSet.getDate("endDate");
 
-					Integer Amount = resultSet.getInt(5);
+					Integer Amount = resultSet.getInt("Amount");
 
-					String type = resultSet.getString(6);
+					String type = resultSet.getString("Type");
 
-					CouponType couponType = null;
-					switch (type) {
-					case "FOOD":
-						couponType = CouponType.Food;
-						// tmp.setType(CouponType.Food);
-						break;
-					case "RESTURANT":
-						couponType = CouponType.Resturant;
+					CouponType couponType = CouponType.valueOf(type);
+//					CouponType couponType = null;
+//					switch (type) {
+//					case "FOOD":
+//						couponType = CouponType.Food;
+//						// tmp.setType(CouponType.Food);
+//						break;
+//					case "RESTURANT":
+//						couponType = CouponType.Resturant;
+//
+//						// tmp.setType(CouponType.Resturant);
+//						break;
+//					case "ELECTRICITY":
+//						couponType = CouponType.Electricity;
+//
+//						// tmp.setType(CouponType.Electricity);
+//						break;
+//					case "HEALTH":
+//						couponType = CouponType.Health;
+//
+//						// tmp.setType(CouponType.Health);
+//						break;
+//					case "SPORTS":
+//						couponType = CouponType.Sports;
+//
+//						// tmp.setType(CouponType.Sports);
+//						break;
+//					case "CAMPING":
+//						couponType = CouponType.Camping;
+//
+//						// tmp.setType(CouponType.Camping);
+//						break;
+//					case "TRAVELLING":
+//						couponType = CouponType.Travelling;
+//
+//						// tmp.setType(CouponType.Travelling);
+//						break;
 
-						// tmp.setType(CouponType.Resturant);
-						break;
-					case "ELECTRICITY":
-						couponType = CouponType.Electricity;
+					// }
 
-						// tmp.setType(CouponType.Electricity);
-						break;
-					case "HEALTH":
-						couponType = CouponType.Health;
+					String Massage = resultSet.getString("Message");
 
-						// tmp.setType(CouponType.Health);
-						break;
-					case "SPORTS":
-						couponType = CouponType.Sports;
+					double Price = resultSet.getDouble("price");
+					String Image = resultSet.getString("image");
 
-						// tmp.setType(CouponType.Sports);
-						break;
-					case "CAMPING":
-						couponType = CouponType.Camping;
-
-						// tmp.setType(CouponType.Camping);
-						break;
-					case "TRAVELLING":
-						couponType = CouponType.Travelling;
-
-						// tmp.setType(CouponType.Travelling);
-						break;
-
-					}
-					{
-						String Massage = resultSet.getString(7);
-
-						double Price = resultSet.getDouble(8);
-						String Image = resultSet.getString(9);
-
-						coupon = new Coupon(id, Title, startdate, endDate, Amount, couponType, Massage, Price, Image);
-						list.put(id, coupon);
-					}
+					coupon = new Coupon(id, Title, startdate, endDate, Amount, couponType, Massage, Price, Image);
+					list.put(id, coupon);
 
 				} while (resultSet.next());
 			} else {

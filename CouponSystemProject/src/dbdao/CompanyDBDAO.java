@@ -150,7 +150,7 @@ public class CompanyDBDAO implements CompanyDAO {
 			} catch (Exception e) {
 				throw new Exception("cannot get connection");
 			}
-		String sql = "SELECT * FROM company where comapnyname = ?";
+		String sql = "SELECT * FROM company where companyname = ?";
 	 PreparedStatement pStatement = con.prepareStatement(sql);
 	 pStatement.setString(1, name);
 	 resultSet = pStatement.executeQuery() ;
