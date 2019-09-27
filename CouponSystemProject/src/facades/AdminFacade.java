@@ -8,7 +8,7 @@ import java.util.Set;
 
 import java.util.jar.Attributes.Name;
 import exception.*;
-import org.apache.derby.client.am.ClientTypes;
+
 
 import beans.Company;
 import beans.Customer;

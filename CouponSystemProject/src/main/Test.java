@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import org.apache.derby.iapi.db.Database;
+
 import org.omg.CORBA.PUBLIC_MEMBER;
 
 import beans.Company;
@@ -24,14 +24,18 @@ public class Test {
 
 	public static void main(String[] args) throws Exception {
 
-		// DataBase.CreateAllTabales();
-        //DataBase.DropAllTables();
-
-		//Test1.Admin();
+		System.out.println("start");
 		
-		 Test1.Company();
+		// DataBase.CreateAllTabales();
+      //  DataBase.DropAllTables();
+
+        System.out.println("end");
+        
+	//	Test1.Admin();
+		
+		 //Test1.Company();
 		 
-		// Test1.Customer();
+		 Test1.Customer();
 	}
 
 }

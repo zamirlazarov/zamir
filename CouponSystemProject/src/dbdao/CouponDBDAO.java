@@ -50,9 +50,9 @@ public class CouponDBDAO implements CouponDAO {
 			pstmt.executeUpdate();
 
 			String query = "SELECT * FROM coupon where title = ?";
-			 PreparedStatement pStatement = con.prepareStatement(query);
-			 pStatement.setString(1, coupon.getTitle());
-			 ResultSet resultSet = pStatement.executeQuery() ;
+			PreparedStatement pStatement = con.prepareStatement(query);
+			pStatement.setString(1, coupon.getTitle());
+			ResultSet resultSet = pStatement.executeQuery();
 			if (resultSet.next()) {
 				id = resultSet.getLong("id");
 			}
@@ -142,7 +142,7 @@ public class CouponDBDAO implements CouponDAO {
 	public Coupon getCoupon(long id) throws Exception {
 		Connection con = null;
 		ResultSet resultSet = null;
-		Coupon coupon = new Coupon();
+		Coupon coupon = null;
 
 		try {
 			try {
@@ -152,52 +152,24 @@ public class CouponDBDAO implements CouponDAO {
 				throw new Exception("Error connection");
 			}
 			String sql = "SELECT * from Coupon where id=" + id;
-			PreparedStatement pstmt = con.prepareStatement(sql);
+			PreparedStatement pstmt = con.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
 //*/
 			resultSet = pstmt.executeQuery();
-			if (resultSet.next()) {
-				do {
-					coupon.setCouponId(resultSet.getLong(1));
-					coupon.setTitle(resultSet.getString(2));
-					coupon.setStartDate(resultSet.getDate(3));
-					coupon.setEndDate(resultSet.getDate(4));
-					coupon.setAmount(resultSet.getInt(5));
-					String type = resultSet.getString(6);
-					switch (type) {
-					case "FOOD":
-						coupon.setType(CouponType.Food);
-						break;
-					case "RESTURANT":
-						coupon.setType(CouponType.Resturant);
-						break;
-					case "ELECTRICITY":
-						coupon.setType(CouponType.Electricity);
-						break;
-					case "HEALTH":
-						coupon.setType(CouponType.Health);
-						break;
-					case "SPORTS":
-						coupon.setType(CouponType.Sports);
-						break;
-					case "CAMPING":
-						coupon.setType(CouponType.Camping);
-						break;
-					case "TRAVELLING":
-						coupon.setType(CouponType.Travelling);
-						break;
-					}
-
-					coupon.setMessage(resultSet.getString(7));
-					coupon.setPrice(resultSet.getDouble(8));
-					coupon.setImage(resultSet.getString(9));
-
-				} while (resultSet.next());
-			} else {
-				throw new Exception("Cannot get this coupon");
-			}
+                    String Title = resultSet.getString("Title");
+					Date startdate = resultSet.getDate("startdate");
+					Date endDate = resultSet.getDate("endDate");
+					int Amount = resultSet.getInt("Amount");
+					String type = resultSet.getString("Type");
+					CouponType couponType = CouponType.valueOf(type);
+					String Massage = resultSet.getString("Message");
+					double Price = resultSet.getDouble("price");
+					String Image = resultSet.getString("image");
+					coupon = new Coupon(Title, startdate, endDate, Amount, couponType, Massage, Price, Image);
+					return coupon;
+					
 		} catch (Exception e) {
 			e.printStackTrace();
-
+			throw new Exception("Cannot get this coupon");
 		} finally {
 			if (connectionPool != null) {
 				connectionPool.returnConnection(con);
@@ -208,7 +180,7 @@ public class CouponDBDAO implements CouponDAO {
 
 			}
 		}
-		return coupon;
+		
 
 	}
 
@@ -217,7 +189,7 @@ public class CouponDBDAO implements CouponDAO {
 		Connection con = null;
 		ResultSet resultSet = null;
 		Map<Long, Coupon> list = new HashMap<>();
-		Coupon coupon = new Coupon();
+		Coupon coupon = null;
 
 		try {
 			try {

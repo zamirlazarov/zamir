@@ -16,10 +16,6 @@ public class Coupon {
 	private double price;
 	private String image;
 
-	public Coupon() {
-	}
-
-
 	public Coupon(String title, Date startDate, Date endDate, int amount, CouponType type,
 			String message, double price, String image) throws Exception {
 		

@@ -15,15 +15,15 @@ public class Test1 {
 		CouponSystem couponSystem = CouponSystem.getInstance();
 		AdminFacade adminFacade = (AdminFacade) couponSystem.login("admin", "1234", ClientType.adminfacade);
 
-		// adminFacade.insertCompany("Teva", "1234", "teva@gmail.com");
+//		 adminFacade.insertCompany("Teva", "1234", "teva@gmail.com");
 //		System.out.println(2);
-		// adminFacade.insertCompany("TikunOlam", "1597", "TikunOlam@gmail.com");
-		// adminFacade.insertCompany("Amdocs", "2345", "Amdocs@gmail.com");
+//		 adminFacade.insertCompany("TikunOlam", "1597", "TikunOlam@gmail.com");
+//		 adminFacade.insertCompany("Amdocs", "2345", "Amdocs@gmail.com");
 //		adminFacade.insertCompany("BBB", "4567", "BBB@gmail.com");
-//		adminFacade.insertCompany(127,"MOses", "98874", "moses@gmail.com");
+//		adminFacade.insertCompany("MOses", "98874", "moses@gmail.com");
 //
-		adminFacade.insertCustomer("BobiBoten", "7456");
-		// adminFacade.insertCustomer(" Zamir Lazarev", "3112");
+//		adminFacade.insertCustomer("BobiBoten", "7456");
+//		 adminFacade.insertCustomer(" Zamir Lazarev", "3112");
 //		adminFacade.insertCustomer("Cristiano Ronaldo", "0707");
 //		adminFacade.insertCustomer("Shuki Potash", "4458");
 //		adminFacade.insertCustomer("Eli Taviv", "1556");
@@ -31,11 +31,11 @@ public class Test1 {
 
 		// System.out.println("end");
 
-		adminFacade.getallCompanies();
-		adminFacade.getallCustomers();
+//		adminFacade.getallCompanies();
+//		adminFacade.getallCustomers();
 //	
 		// adminFacade.updateCompany((long) 1, "tevabari", "12345",
-		// "tevabari@gmail.com");
+		//"tevabari@gmail.com");
 		// adminFacade.getallCompanies();
 		// adminFacade.updateCustomer((long) 1, "shuki", "5555");
 //		
@@ -52,34 +52,33 @@ public class Test1 {
 		System.out.println("start");
 		CouponSystem couponSystem = CouponSystem.getInstance();
 
-		CompanyFacade companyFacade = (CompanyFacade) couponSystem.login("Teva", "1234", ClientType.companyfacade);
+		CompanyFacade companyFacade = (CompanyFacade) couponSystem.login("tevabari", "12345", ClientType.companyfacade);
 		Date startDate = new Date(DateEvents.getDateFromToday(0));
 		Date endDate = new Date(DateEvents.getDateFromToday(1));
 
-		//companyFacade.insertCoupon("humnburger22", startDate, endDate, 20, CouponType.Health, "Good Indica", 4555, "");
-		//*companyFacade.insertCoupon("AK47", startDate, endDate, 20, CouponType.Health, "Good Indica", 4000, "");
-		// companyFacade.insertCoupon("Hamburger", startDate, endDate, 20,
-		// CouponType.Resturant, "200 Gram with bacon", 50,"");
+//		companyFacade.insertCoupon("Inbar", startDate, endDate, 20, CouponType.Health, "Good Indica", 4555, "");
+//		companyFacade.insertCoupon("AK47", startDate, endDate, 20, CouponType.Health, "Good Indica", 4000, "");
+//		 companyFacade.insertCoupon("Hamburger", startDate, endDate, 2, CouponType.Resturant, "200 Gram with bacon", 50,"");
 
 		System.out.println("end");
-		 //companyFacade.deleteCoupon(2);
-		// companyFacade.getCouponsByPrice(4000);
+	//	 companyFacade.deleteCoupon(3);
+		 //companyFacade.getCouponsByPrice(4000);
 		// companyFacade.getCompany();
-		 //companyFacade.updateCoupon(endDate, 3000, 6);
+		// companyFacade.updateCoupon(endDate, 3000, 3);
 		// companyFacade.getCouponsByType(CouponType.Health);
-		// companyFacade.getCouponsByEndDate(28, 07, 2019);
+	//	 companyFacade.getCouponsByEndDate(03, 8, 2019);
 		couponSystem.getInstance().shutdown();
 
 	}
 
 	public static void Customer() throws Exception {
 		CouponSystem couponSystem = CouponSystem.getInstance();
-		CustomerFacade customerFacade = (CustomerFacade) couponSystem.login("Zamir Lazarev", "3112",
+		CustomerFacade customerFacade = (CustomerFacade) couponSystem.login("BobiBoten", "7456",
 				ClientType.customerfacade);
-		customerFacade.purchaseCouponById(2);
-//	     customerFacade.getPurchaseHistory();
-//	     customerFacade.getPurchaseHistoryByPrice(2500);
-//	     customerFacade.getPurchaseHistoryByType(CouponType.Health);
+		//customerFacade.purchaseCouponById();
+	    // customerFacade.getPurchaseHistory();
+	    // customerFacade.getPurchaseHistoryByPrice(50);
+//     customerFacade.getPurchaseHistoryByType(CouponType.Health);
 		couponSystem.getInstance().shutdown();
 
 	}

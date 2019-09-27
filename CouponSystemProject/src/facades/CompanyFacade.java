@@ -1,9 +1,11 @@
 package facades;
 
 
+import java.io.Console;
 import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -91,7 +93,10 @@ public class CompanyFacade implements CouponClientFacade {
 			companyDBDAO.getCompany(companyID);
 		}
 		}
-	
+	public void getCouponById(long id) throws Exception {
+	Coupon coupon = couponDBDAO.getCoupon(id);
+	System.out.println("Coupon with id : "+coupon.getCouponId()+"");
+	}
 	public void getAllCompanysCoupons() throws Exception {
 		if (company.getList() != null) {
 			System.out.println("Loading all your Company coupons...");
@@ -120,20 +125,25 @@ public class CompanyFacade implements CouponClientFacade {
 			System.out.println("Coupons from type " + type.toString() + " not found");
 		}
 	}
-	public void getCouponsByPrice(double price) {
+	public void getCouponsByPrice(double price) throws Exception {
 		System.out.println("Searching for coupons with the price " + price + "...");
+		System.out.println(company.getList());
 		Iterator<Entry<Long, Coupon>> iterator = company.getList().entrySet().iterator();
 		int count = 0;
-		while (iterator.hasNext()) {
-			Entry<Long, Coupon> entry = iterator.next();
-			Coupon coupon = (Coupon) entry.getValue();
-			if (coupon.getPrice() == price) {
-				System.out.println(coupon);
-				count++;
+		while(iterator.hasNext()) {
+			Entry<Long,Coupon> entry = iterator.next();
+					Coupon coupon = (Coupon)entry.getValue();
+					if(coupon.getPrice() == price) {
+						count++;
+					}
+	
 			}
-		}
+		
 		if (count == 0) {
 			System.out.println("Coupons with the price " + price + " not found");
+		}
+		else {
+			System.out.println("Coupons with the price " + count );
 		}
 	}
 	
